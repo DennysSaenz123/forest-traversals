@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,16 @@ public class TreeProblems {
    If the root is null, do nothing.
    */
   public static <T> void postOrder(Node<T> root) {
+
+    if(root == null){
+      return;
+    }
+
+    for(Node<T> child : root.children){
+      postOrder(child);
+    }
+    System.out.println(root.value);
+
   }
 
   /*
@@ -55,7 +66,15 @@ public class TreeProblems {
    5
    */
   public static <T> void postOrder(Map<T, List<T>> tree, T root) {
-  }
+    if (tree == null || root == null || !tree.containsKey(root)) return;
+
+    for (T child : tree.get(root)) {
+        if (tree.containsKey(child)) postOrder(tree, child);
+        else System.out.println(child);
+    }
+
+    System.out.println(root);
+}
 
   /*
    sumTree (Node Version)
